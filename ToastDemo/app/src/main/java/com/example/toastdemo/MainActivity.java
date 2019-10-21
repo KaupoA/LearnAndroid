@@ -1,21 +1,22 @@
-package com.example.demoapp;
+package com.example.toastdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-        public void changeButton(View view) {
+    public void clickmeButton(View view) {
 
-        ImageView e34 =  (ImageView) findViewById(R.id.bmwe34);
+        EditText nameEditText = (EditText) findViewById(R.id.nameEditText);
 
-        e34.setImageResource(R.drawable.miata);
+        Toast.makeText(this, "Hi there, " + nameEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        Log.i("Info", nameEditText.getText().toString());
 
     }
 
