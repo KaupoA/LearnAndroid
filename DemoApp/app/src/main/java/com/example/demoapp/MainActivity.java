@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void changeButton(View view) {
 
-        ImageView e34 =  (ImageView) findViewById(R.id.bmwe34);
+        ImageView e34 = (ImageView) findViewById(R.id.bmwe34);
 
         e34.setImageResource(R.drawable.miata);
 
