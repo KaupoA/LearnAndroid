@@ -1,0 +1,2 @@
+include ':app', ':learningJava'
+rootProject.name='FirstFreaking'
