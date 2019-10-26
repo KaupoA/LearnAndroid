@@ -195,6 +195,34 @@ public class MyClass {
 
         System.out.println(returnFirstLastName("Kaupo ", "Aun"));
 
+        // Classes
+
+        Dog myPup = new Dog();
+
+        myPup.name = "Holden";
+        myPup.age = 2;
+        myPup.furColor = "White";
+
+        myPup.tellMeAboutTheDog();
+
+        Dog anotherPup = new Dog();
+
+        anotherPup.name = "Dolden";
+
+        Retriever myDog = new Retriever();
+
+        myDog.dumDum = 2.46;
+
+        Switch mySwitch = new Switch();
+
+        mySwitch.leftJoyconColor = "Blue";
+        mySwitch.rightJoyconColor = "Red";
+
+        mySwitch.howMuchBattery = 20;
+        mySwitch.howManyHoursEmpty = 2.4;
+
+        mySwitch.playGames();
+
     }
 
     public static void songTitle() {
@@ -216,3 +244,81 @@ public class MyClass {
     }
 
 }
+
+
+// Classes
+
+class Dog {
+
+    String name = "";
+    int age = 0;
+    String furColor = "";
+    String breed = "";
+
+    void tellMeAboutTheDog() {
+
+        System.out.println("The dogs name is " + name + ", it is " + age + " years old.");
+
+    }
+
+}
+
+class Retriever extends Dog {
+
+    double dumDum = 0.0;
+
+}
+
+// 1. Make a class from something in the room around you
+// 2. Make properties for that class
+// 3. Make a function for that class that uses properties
+
+class Switch {
+
+    String rightJoyconColor = "";
+    String leftJoyconColor = "";
+
+    int howMuchBattery = 0;
+
+    double howManyHoursEmpty = 0.0;
+
+    void playGames() {
+
+        for (int i = howMuchBattery; i >= 0; i--) {
+
+            System.out.println(i + "%");
+
+        }
+
+        System.out.println("The battery is empty, please charge the battery!");
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
