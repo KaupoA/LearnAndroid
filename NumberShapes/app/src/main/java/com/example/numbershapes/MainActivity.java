@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
         numberEditText = findViewById(R.id.numberEditText);
 
-        double d = Double.parseDouble(numberEditText.getText().toString());
+        int i = Integer.parseInt(numberEditText.getText().toString());
 
 
-        if (Numbers.isSquare(d)) {
+        if (Numbers.isSquare(i)) {
 
-            if (Numbers.isTriangular(d)) {
+            if (Numbers.isTriangular(i)) {
 
                 makeToast(" is a triangular and a square number.");
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
 
-            if (Numbers.isTriangular(d)) {
+            if (Numbers.isTriangular(i)) {
 
                 makeToast(" is a triangular number.");
 
