@@ -21,30 +21,38 @@ public class MainActivity extends AppCompatActivity {
 
         numberEditText = findViewById(R.id.numberEditText);
 
-        int i = Integer.parseInt(numberEditText.getText().toString());
+        if(numberEditText.getText().toString().isEmpty()) {
 
-
-        if (Numbers.isSquare(i)) {
-
-            if (Numbers.isTriangular(i)) {
-
-                makeToast(" is a triangular and a square number.");
-
-            } else {
-
-                makeToast(" is a square number.");
-
-            }
+            makeToast("Please enter a number");
 
         } else {
 
-            if (Numbers.isTriangular(i)) {
+            int i = Integer.parseInt(numberEditText.getText().toString());
 
-                makeToast(" is a triangular number.");
+
+            if (Numbers.isSquare(i)) {
+
+                if (Numbers.isTriangular(i)) {
+
+                    makeToast(" is a triangular and a square number.");
+
+                } else {
+
+                    makeToast(" is a square number.");
+
+                }
 
             } else {
 
-                makeToast(" is not a triangular or a square number.");
+                if (Numbers.isTriangular(i)) {
+
+                    makeToast(" is a triangular number.");
+
+                } else {
+
+                    makeToast(" is not a triangular or a square number.");
+
+                }
 
             }
 
