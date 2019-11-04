@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         nameListView = findViewById(R.id.nameListView);
 
-        ArrayAdapter<String> peateeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, peateeNames);
+        ArrayAdapter<String> peateeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, peateeNames);
         nameListView.setAdapter(peateeAdapter);
 
         nameListView.setOnItemClickListener(this);
