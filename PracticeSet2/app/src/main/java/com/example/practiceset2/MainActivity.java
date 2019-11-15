@@ -11,7 +11,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // PASTE CODE YOU WANT TO TEST HERE
-        
+        int weekday = 5;
+        int weekend = 9;
+        int optimalHours = 7 * 8;
+        int actualHours = weekday * 5 + weekend * 2;
+        int solution = optimalHours - actualHours;
+        display(solution);
 
     }
 
