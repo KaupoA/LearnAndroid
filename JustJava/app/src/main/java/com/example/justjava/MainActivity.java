@@ -3,6 +3,7 @@ package com.example.justjava;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Check if user wants whipped cream
+     * @return is checkbox checked(true) or not checked(false)
+     */
+
+    public boolean hasWhippedCream() {
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whippedCreamCheckBox);
+        return whippedCreamCheckBox.isChecked();
+    }
+
+    /**
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
@@ -56,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void createOrderSummary() {
         String orderSummary = "Name: Pentanool" +
+                "\nAdd whipped cream?" + hasWhippedCream() +
                 "\nQuantity: " + quantity +
                 "\nTotal: " + calculatePrice() + "€" +
                 "\nThank you!";
