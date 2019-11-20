@@ -1,3 +1,44 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Just Java</string>
+
+    <!-- Hint for EditText -->
+    <string name="name_hint">Name</string>
+
+    <!-- Header text for the list of toppings [CHAR LIMIT=20] -->
+    <string name="toppings">Toppings</string>
+
+    <string name="whipped_cream">Whipped cream</string>
+
+    <string name="chocolate">Chocolate</string>
+
+    <string name="order_subject">JustJava order for <xliff:g id="name" example="Amy">%s</xliff:g></string>
+
+    <!-- Name for the order summary. It will be shown in the format of "Name: Amy" where Amy is the
+     users name. [CHAR LIMIT=NONE]
+     -->
+    <string name="order_summary_name">Name: <xliff:g id="name" example="Amy">%s</xliff:g></string>
+
+    <!-- Add whipped cream text for checkbox. -->
+    <string name="add_whipped_cream">Add whipped cream? </string>
+
+    <!-- Add chocolate text for checkbox. -->
+    <string name="add_chocolate">Add chocolate? </string>
+
+    <!-- Header text for quantity -->
+    <string name="quantity_header">Quantity</string>
+
+    <!-- Quantity message for order summary. -->
+    <string name="quantity_order">Quantity: </string>
+
+    <!-- Total message for order summary. -->
+    <string name="total">Total: </string>
+
+    <!-- Thank you message for the order summary. [CHAR LIMIT=NONE] -->
+    <string name="thank_you">Thank you!</string>
+
+    <string name="minus_button">-</string>
+
+    <string name="plus_button">+</string>
+
+    <string name="order_button">Order</string>
 </resources>

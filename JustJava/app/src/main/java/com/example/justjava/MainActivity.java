@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.NumberFormat;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -67,18 +69,12 @@ public class MainActivity extends AppCompatActivity {
         boolean hasChocolate = chocolateCheckBox.isChecked();
 
         int price = calculatePrice(hasWhippedCream, hasChocolate);
-
-        String emailText = "Name: " + name +
-                "\nAdd whipped cream? " + hasWhippedCream +
-                "\nAdd chocolate? " + hasChocolate +
-                "\nQuantity: " + quantity +
-                "\nTotal: " + price + "€" +
-                "\nThank you!";
+        String priceMessage = createOrderSummary(name, price, hasWhippedCream, hasChocolate);
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_SUBJECT, "JustJava order for " + name);
-        intent.putExtra(Intent.EXTRA_TEXT, emailText);
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.order_subject, name));
+        intent.putExtra(Intent.EXTRA_TEXT, priceMessage);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -107,6 +103,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Calculate the total orded price by multiplying by quantity
         return quantity * pricePerCup;
+    }
+
+    private String createOrderSummary(String name, int price,
+                                      boolean addWhippedCream, boolean addChocolate) {
+        return getString(R.string.order_summary_name, name) +
+                "\n" + getString(R.string.add_whipped_cream) + addWhippedCream +
+                "\n" + getString(R.string.add_chocolate) + addChocolate +
+                "\n" + getString(R.string.quantity_order) + quantity +
+                "\n" + getString(R.string.total) + NumberFormat.getCurrencyInstance().format(price) +
+                "\n" + getString(R.string.thank_you);
     }
 
     /**
