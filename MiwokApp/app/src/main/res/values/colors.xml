@@ -20,4 +20,7 @@
 
     <!-- Background color for the phrases category -->
     <color name="category_phrases">#16AFCA</color>
+
+    <!-- Background color for the image -->
+    <color name="image_background">#FFF7DA</color>
 </resources>
