@@ -13,6 +13,12 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/forwardyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=">>" />
+
+        <Button
             android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,6 +29,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pause" />
+
+        <Button
+            android:id="@+id/rewindButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rewind" />
     </LinearLayout>
 
     <SeekBar

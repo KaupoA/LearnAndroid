@@ -11,9 +11,14 @@ import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button playButton, pauseButton;
+    private Button playButton, pauseButton, forwardButton, rewindButton;
     private SeekBar seekbar;
     private MediaPlayer mplayer;
+
+    private double startTime = 0;
+    private double finalTime = 0;
+    private int forwardTime = 5000;
+    private int rewindTime = 5000;
 
     private Handler mHandler;
     private Runnable mRunnable;
@@ -25,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         playButton = findViewById(R.id.playButton);
         pauseButton = findViewById(R.id.pauseButton);
+        forwardButton = findViewById(R.id.forwardyButton);
+        rewindButton = findViewById(R.id.rewindButton);
         seekbar = findViewById(R.id.seekBar);
         mplayer = MediaPlayer.create(this, R.raw.bensounddubstep);
 
@@ -38,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mplayer.start();
 
+                finalTime = mplayer.getDuration();
+                startTime = mplayer.getCurrentPosition();
+
                 initializeSeekBar();
                 playButton.setEnabled(false);
                 pauseButton.setEnabled(true);
@@ -50,6 +60,30 @@ public class MainActivity extends AppCompatActivity {
                 mplayer.pause();
                 playButton.setEnabled(true);
                 pauseButton.setEnabled(false);
+            }
+        });
+
+        forwardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int temp = (int)startTime;
+
+                if ((temp + forwardTime) <= finalTime) {
+                    startTime = startTime + forwardTime;
+                    mplayer.seekTo((int)startTime);
+                }
+            }
+        });
+
+        rewindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int temp = (int)startTime;
+
+                if ((temp - rewindTime) > 0) {
+                    startTime = startTime - rewindTime;
+                    mplayer.seekTo((int)startTime);
+                }
             }
         });
 
