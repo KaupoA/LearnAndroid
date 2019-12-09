@@ -1,6 +1,5 @@
 package com.example.miwokapp;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +36,14 @@ public class WordAdapter extends ArrayAdapter<Word> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate
                     (R.layout.list_item, parent, false);
         }
 
-        Word currentWord = getItem(position);
+        final Word currentWord = getItem(position);
         TextView miwokTextView = listItemView.findViewById(R.id.miwokTextView);
         miwokTextView.setText(currentWord.getMiwokTranslation());
 
@@ -60,9 +59,19 @@ public class WordAdapter extends ArrayAdapter<Word> {
             numbersImageView.setVisibility(View.GONE);
         }
 
-        View listItem = listItemView.findViewById(R.id.listItem);
+        final View listItem = listItemView.findViewById(R.id.listItem);
         int color = ContextCompat.getColor(getContext(), mColorResourceId);
         listItem.setBackgroundColor(color);
+
+        // Audio for every item in list
+/*        listItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaPlayer mediaPlayer = MediaPlayer.create
+                        (getContext(), currentWord.getAudioResourceId());
+                mediaPlayer.start();
+            }
+        });*/
 
         return listItemView;
     }
