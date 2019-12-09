@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekbar;
     private MediaPlayer mplayer;
 
-    private double startTime = 0;
-    private double finalTime = 0;
     private int forwardTime = 5000;
     private int rewindTime = 5000;
 
@@ -45,12 +44,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mplayer.start();
 
-                finalTime = mplayer.getDuration();
-                startTime = mplayer.getCurrentPosition();
-
                 initializeSeekBar();
                 playButton.setEnabled(false);
                 pauseButton.setEnabled(true);
+
+                mplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        Toast.makeText(MainActivity.this, "The song has ended!", Toast.LENGTH_SHORT).show();
+                        playButton.setEnabled(true);
+                        pauseButton.setEnabled(false);
+                    }
+                });
             }
         });
 
@@ -66,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
         forwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int temp = (int)startTime;
+                int currentPosition = mplayer.getCurrentPosition();
 
-                if ((temp + forwardTime) <= finalTime) {
-                    startTime = startTime + forwardTime;
-                    mplayer.seekTo((int)startTime);
+                if ((currentPosition + forwardTime) <= mplayer.getDuration()) {
+                    mplayer.seekTo(currentPosition + forwardTime);
+                } else {
+                    mplayer.seekTo(mplayer.getDuration());
                 }
             }
         });
@@ -78,11 +84,12 @@ public class MainActivity extends AppCompatActivity {
         rewindButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int temp = (int)startTime;
+                int currentPosition = mplayer.getCurrentPosition();
 
-                if ((temp - rewindTime) > 0) {
-                    startTime = startTime - rewindTime;
-                    mplayer.seekTo((int)startTime);
+                if ((currentPosition - rewindTime) >= 0) {
+                    mplayer.seekTo(currentPosition - rewindTime);
+                } else {
+                    mplayer.seekTo(0);
                 }
             }
         });
@@ -104,12 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
     }
