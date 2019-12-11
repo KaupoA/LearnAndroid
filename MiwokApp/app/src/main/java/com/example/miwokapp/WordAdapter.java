@@ -10,28 +10,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 public class WordAdapter extends ArrayAdapter<Word> {
 
     private int mColorResourceId;
 
-    WordAdapter(NumbersActivity numbersActivity, ArrayList<Word> words, int colorResourceId) {
-        super(numbersActivity, 0, words);
-        mColorResourceId = colorResourceId;
-    }
-
-    WordAdapter(FamilyActivity familyActivity, ArrayList<Word> words, int colorResourceId) {
-        super(familyActivity, 0, words);
-        mColorResourceId = colorResourceId;
-    }
-
-    WordAdapter(ColorsActivity colorsActivity, ArrayList<Word> words, int colorResourceId) {
-        super(colorsActivity, 0, words);
-        mColorResourceId = colorResourceId;
-    }
-
-    WordAdapter(PhrasesActivity phrasesActivity, ArrayList<Word> words, int colorResourceId) {
-        super(phrasesActivity, 0, words);
+    WordAdapter(FragmentActivity fragmentActivity, ArrayList<Word> words, int colorResourceId) {
+        super(fragmentActivity, 0, words);
         mColorResourceId = colorResourceId;
     }
 

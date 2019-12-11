@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Miwok</string>
     <string name="numbers_label">Numbers</string>
-    <string name="family_label">Family Members</string>
+    <string name="family_label">Family</string>
     <string name="colors_label">Colors</string>
     <string name="phrases_label">Phrases</string>
+    <string name="numbers">Numbers</string>
 </resources>

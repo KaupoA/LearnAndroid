@@ -10,14 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PhrasesActivity"
-            android:label="@string/phrases_label" />
-        <activity android:name=".ColorsActivity"
-            android:label="@string/colors_label" />
-        <activity android:name=".FamilyActivity"
-            android:label="@string/family_label" />
-        <activity android:name=".NumbersActivity"
-            android:label="@string/numbers_label" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
