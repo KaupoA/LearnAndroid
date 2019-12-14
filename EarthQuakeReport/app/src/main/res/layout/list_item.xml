@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/magnitudeText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#4689C8"
+        android:textStyle="bold"
+        tools:text="7.1" />
+
+    <TextView
+        android:id="@+id/nearLocationText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#4689C8"
+        android:textStyle="bold"
+        tools:text="Near the" />
+
+    <TextView
+        android:id="@+id/locationText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#4689C8"
+        android:textStyle="bold"
+        tools:text="San Francisco" />
+
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#4689C8"
+        android:textStyle="bold"
+        tools:text="Feb 2, 2016" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#4689C8"
+        android:textStyle="bold"
+        tools:text="12:32:45" />
+
+</LinearLayout>
