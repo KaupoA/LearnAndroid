@@ -57,9 +57,10 @@ final class QueryUtils {
 
                 double magnitude = properties.getDouble("mag");
                 String location = properties.getString("place");
-                Long date = properties.getLong("time");
+                long date = properties.getLong("time");
+                String url = properties.getString("url");
 
-                earthquake.add(new QuakeReport(magnitude, location, date));
+                earthquake.add(new QuakeReport(magnitude, location, date, url));
             }
 
         } catch (JSONException e) {
