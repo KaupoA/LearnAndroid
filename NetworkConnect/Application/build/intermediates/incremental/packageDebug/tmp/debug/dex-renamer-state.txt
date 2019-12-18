@@ -1,4 +1,0 @@
-#Tue Dec 17 18:00:22 EET 2019
-base.0=C\:\\Users\\Kast\\AndroidStudioProjectsV2\\NetworkConnect\\Application\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
-path.0=classes.dex
-renamed.0=classes.dex

@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +32,7 @@ public class QuakeReportAdapter extends ArrayAdapter<QuakeReport> {
      * @param earthquake A List of QuakeReport objects to display in a list
      */
 
-    QuakeReportAdapter(Activity context, ArrayList<QuakeReport> earthquake) {
+    QuakeReportAdapter(Activity context, List<QuakeReport> earthquake) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // the second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for three TextViews, the adapter is not
@@ -127,13 +127,13 @@ public class QuakeReportAdapter extends ArrayAdapter<QuakeReport> {
 
     private String formatDate(Date dateObject) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat =
-                new SimpleDateFormat("DD MMM, yyyy");
+                new SimpleDateFormat("EEE, d MMM yyyy");
         return dateFormat.format(dateObject);
     }
 
     private String formatTime(Date timeObject) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat timeFormat =
-                new SimpleDateFormat("HH:mm:ss");
+                new SimpleDateFormat("HH:mm:ss z");
         return timeFormat.format(timeObject);
     }
 

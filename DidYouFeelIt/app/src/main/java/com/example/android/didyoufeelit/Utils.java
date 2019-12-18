@@ -56,10 +56,9 @@ public final class Utils {
         }
 
         // Extract relevant fields from the JSON response and create an {@link Event} object
-        Event earthquake = extractFeatureFromJson(jsonResponse);
 
         // Return the {@link Event}
-        return earthquake;
+        return extractFeatureFromJson(jsonResponse);
     }
 
     /**
