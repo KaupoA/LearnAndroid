@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LoaderManager loaderManager = getSupportLoaderManager();
+        LoaderManager loaderManager = LoaderManager.getInstance(this);
         loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
 
         ListView earthquakeListView = findViewById(R.id.list);
@@ -74,17 +72,25 @@ public class MainActivity extends AppCompatActivity
         View loadingSpinner = findViewById(R.id.loadingSpinner);
         loadingSpinner.setVisibility(View.GONE);
 
-        ConnectivityManager cm =
+        /*ConnectivityManager cm =
                 (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         if (networkInfo == null ) {
         // State that there is no internet connection
             mEmptyStateTextView.setText(R.string.no_internet_connection);
-        } else if (networkInfo!=null && networkInfo.isConnected()){
+        } else if (networkInfo!=null && networkInfo.isAvailable()){
         // There is internet but list is still empty
             mEmptyStateTextView.setText(R.string.no_earthquakes);
         }
-        // Clear the adapter of previous data.
+        // Clear the adapter of previous data.*/
+
+        if (!isOnline()) {
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+        } else {
+            mEmptyStateTextView.setText(R.string.no_earthquakes);
+        }
+
         mAdapter.clear();
 
         // If there is a valid list on {@QuakeReport}, then add them to the adapters
@@ -98,5 +104,20 @@ public class MainActivity extends AppCompatActivity
     public void onLoaderReset(@NonNull Loader loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
+    }
+
+    // Check internet connectivity.
+    // Is that a valid solution?
+    public boolean isOnline() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int     exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+        }
+        catch (IOException e)          { e.printStackTrace(); }
+        catch (InterruptedException e) { e.printStackTrace(); }
+
+        return false;
     }
 }
