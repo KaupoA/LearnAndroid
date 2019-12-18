@@ -1,32 +1,42 @@
 package com.example.earthquakereport;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<List<QuakeReport>>{
 
-    private QuakeReportAdapter mAdapter;
     public static final String LOG_TAG = MainActivity.class.getName();
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10";
+    private QuakeReportAdapter mAdapter;
+    private static final int EARTHQUAKE_LOADER_ID = 1;
+    private TextView mEmptyStateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EarthquakeASyncTask task = new EarthquakeASyncTask();
-        task.execute(USGS_REQUEST_URL);
+        LoaderManager loaderManager = getSupportLoaderManager();
+        loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
 
         ListView earthquakeListView = findViewById(R.id.list);
 
@@ -46,28 +56,47 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        mEmptyStateTextView = findViewById(R.id.emptyView);
+        earthquakeListView.setEmptyView(mEmptyStateTextView);
     }
 
-    private class EarthquakeASyncTask extends AsyncTask<String, Void, List<QuakeReport>> {
-        @Override
-        protected List<QuakeReport> doInBackground(String... urls) {
-            // Don't perform the request if there are no URLs, or the first URL is null.
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-            return QueryUtils.fetchEarthquakeData(urls[0]);
-        }
+    @NonNull
+    @Override
+    public Loader onCreateLoader(int i, @Nullable Bundle bundle) {
+        // Create a new loader for the given URL.
+        return new EarthquakeLoader(this, USGS_REQUEST_URL);
+    }
 
-        @Override
-        protected void onPostExecute(List<QuakeReport> quakeReports) {
-            // Clear the adapter of previous data.
-            mAdapter.clear();
+    @Override
+    public void onLoadFinished(@NonNull Loader<List<QuakeReport>> loader, List<QuakeReport> quakeReports) {
+        // After loading is finished set the visibility for the progress bar to invisible.
+        View loadingSpinner = findViewById(R.id.loadingSpinner);
+        loadingSpinner.setVisibility(View.GONE);
 
-            // If there is a valid list on {@QuakeReport}, then add them to the adapters
-            // quakeReports set. This will trigger the ListView to update.
-            if (quakeReports != null && !quakeReports.isEmpty()) {
-                mAdapter.addAll(quakeReports);
-            }
+        ConnectivityManager cm =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if (networkInfo == null ) {
+        // State that there is no internet connection
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+        } else if (networkInfo!=null && networkInfo.isConnected()){
+        // There is internet but list is still empty
+            mEmptyStateTextView.setText(R.string.no_earthquakes);
         }
+        // Clear the adapter of previous data.
+        mAdapter.clear();
+
+        // If there is a valid list on {@QuakeReport}, then add them to the adapters
+        // quakeReports set. This will trigger the ListView to update.
+        if (quakeReports != null && !quakeReports.isEmpty()) {
+            mAdapter.addAll(quakeReports);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader loader) {
+        // Loader reset, so we can clear out our existing data.
+        mAdapter.clear();
     }
 }

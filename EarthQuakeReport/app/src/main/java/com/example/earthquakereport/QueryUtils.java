@@ -32,6 +32,13 @@ final class QueryUtils {
     }
 
     public static List<QuakeReport> fetchEarthquakeData(String requestUrl) {
+        // Wait 2 seconds before starting the app
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Create URL object
         URL url = createURL(requestUrl);
 
